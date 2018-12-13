@@ -5,11 +5,12 @@
 
 .graph-area {
   border: 2px solid red;
-  height
+  height: 500px;
   width: 60%;
 }
 
 .daily-summary {
   border: 2px solid green;
+  height: 300px;
   width: 40%;
 }

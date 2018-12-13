@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import DailySummary from './DailySummary';
-import YearlyChart from './YearlyChart';
+import DailySummary from './DailySummary/DailySummary';
+import YearlyChart from './YearlyChart/YearlyChart';
 import './App.css';
 
 class App extends Component {
