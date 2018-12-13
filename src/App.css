@@ -1,3 +1,15 @@
 .app {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.graph-area {
+  border: 2px solid red;
+  height
+  width: 60%;
+}
+
+.daily-summary {
+  border: 2px solid green;
+  width: 40%;
 }
