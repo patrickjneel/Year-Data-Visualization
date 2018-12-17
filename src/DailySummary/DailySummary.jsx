@@ -2,7 +2,7 @@ import React from 'react';
 import './daily-summary.css';
 import { TrendingUp, TrendingDown } from '@material-ui/icons';
 import moment from 'moment';
-// <TrendingDown style={{ fill: 'red', height: '50px', width: '50px', }} />
+// <TrendingDown style={{ fill: 'red', height: '115px', width: '115px', }} />
 
 const DailySummary = ({ summaryData }) => {
     return (
