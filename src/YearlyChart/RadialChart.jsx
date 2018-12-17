@@ -11,25 +11,26 @@ class RadialChart extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { data } = nextProps;
-    if (!data) return {};
+    console.log(nextProps)
+    const { weatherData } = nextProps;
+    if (!weatherData) return {};
 
     const radiusScale = d3
       .scaleLinear()
-      .domain([d3.min(data, d => d.low), d3.max(data, d => d.high)])
+      .domain([d3.min(weatherData, d => d.low), d3.max(weatherData, d => d.high)])
       .range([0, width / 2]);
 
     const colorScale = d3
       .scaleSequential()
-      .domain(d3.extent(data, d => d.avg))
+      .domain(d3.extent(weatherData, d => d.avg))
       .interpolator(d3.interpolateRdYlBu);
 
     // get the angle for each slice
     // 2PI / 365
-    const perSliceAngle = (2 * Math.PI) / data.length;
+    const perSliceAngle = (2 * Math.PI) / weatherData.length;
 
     const arcGenerator = d3.arc();
-    const slices = data.map((d, i) => {
+    const slices = weatherData.map((d, i) => {
       const path = arcGenerator({
         startAngle: i * perSliceAngle,
         endAngle: (i + 1) * perSliceAngle,
