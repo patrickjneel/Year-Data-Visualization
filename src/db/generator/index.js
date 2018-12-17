@@ -4,6 +4,7 @@
 const btoa = require('btoa');
 const faker = require('faker');
 const sample = require("lodash.sample");
+const moment = require('moment');
 
 const { productCollection } = require('./productsCollection');
 
@@ -36,7 +37,7 @@ const order = () => {
         "properties": {
           "accountNumber": faker.random.number(),
           "orderNumber": faker.random.number(),
-          "createdDate": faker.date.between('2018-01-01', '2018-12-31'),
+          "createdDate": moment(faker.date.between('2018-01-01', '2018-12-31')).format('L'),
           "userFirstName": faker.name.firstName(),
           "userLastName": faker.name.lastName(),
           "userEmail": faker.internet.email(),
