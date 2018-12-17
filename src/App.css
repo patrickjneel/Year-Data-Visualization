@@ -1,3 +1,8 @@
+* {
+  /*font-family: 'Arimo', sans-serif;*/
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
 .app {
   display: flex;
   flex-direction: row;
@@ -7,5 +12,5 @@
   border: 2px solid green;
   height: 250px;
   margin: 15px;
-  width: 80%;
+  width: 60%;
 }

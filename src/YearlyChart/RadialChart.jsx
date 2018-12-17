@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
+import './yearly-chart.css';
 
 const width = 500;
 const height = 500;
@@ -45,13 +46,12 @@ class RadialChart extends Component {
         temp
       };
     });
-
     return { slices, tempAnnotations };
   }
 
   render() {
     return (
-      <div>
+      <div  className="chart-area">
         <h2>2018 Average Temperature</h2>
         <svg width={width} height={height}>
           <g transform={`translate(${width / 2}, ${height / 2})`}>
