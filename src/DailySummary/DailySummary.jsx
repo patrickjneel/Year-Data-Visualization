@@ -5,7 +5,6 @@ import { TrendingUp, TrendingDown } from '@material-ui/icons';
 // <TrendingDown style={{ fill: 'red', height: '50px', width: '50px', }} />
 
 const DailySummary = ({ summaryData }) => {
-  console.log(summaryData)
     return (
     <div className="daily-summary-container">
       <div className="left-side-container">

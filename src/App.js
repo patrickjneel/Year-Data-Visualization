@@ -3,7 +3,7 @@ import DailySummary from './DailySummary/DailySummary';
 import RadialChart from './YearlyChart/RadialChart';
 import './App.css';
 import weatherData2018 from '../src/db/weather2018.json';
-import orders from '../src/db/orders.json';
+// import orders from '../src/db/orders.json';
 
 class App extends Component {
   state = {
@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-   let orderDays = orders.features.map(day => day.properties.createdDate)
+   // let orderDays = orders.features.map(day => day.properties.createdDate)
   }
 
   onMouseMove = (data) => {
