@@ -13,8 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-          
-          <RadialChart weatherData={weatherData2018}/>
+        <RadialChart weatherData={weatherData2018}/>
         <div className="daily-summary">
           <DailySummary />
         </div>

@@ -1,3 +1,3 @@
 import RadialChart from './RadialChart';
 
-export { RadialChart };
+export default { RadialChart };
