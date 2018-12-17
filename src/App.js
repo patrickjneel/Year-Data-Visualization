@@ -11,7 +11,6 @@ class App extends Component {
   }
 
   componentWillMount() {
-   console.log(orders.features)
   }
 
   onMouseMove = (data) => {
