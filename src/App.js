@@ -13,19 +13,24 @@ class App extends Component {
   componentWillMount() {
   }
 
+  findSome = (date) => {
+    console.log(date)
+    return orders.features.filter(day => day.properties.createdDate === date);
+  }
+
+
   onMouseMove = (data) => {
     this.setState({ data });
   }
 
   render() {
-    const { x, y } = this.state;
     return (
       <div className="app">
         <div>
           <RadialChart weatherData={weatherData2018} mouseMove={this.onMouseMove}/>
         </div>
         <div className="daily-summary">
-          <DailySummary summaryData={this.state.data} />
+          <DailySummary summaryData={this.state.data} find={this.findSome}/>
         </div>
       </div>
     );

@@ -6,7 +6,9 @@ import moment from 'moment';
 const num = 0.88
 const num2 = 0.8
 
-const DailySummary = ({ summaryData }) => {
+const DailySummary = ({ summaryData,find }) => {
+  const findStuff = find(summaryData.date)
+  console.log(findStuff)
   const selectedDate = summaryData.date ? (<h3>{summaryData.date}</h3>) : (<h3>Selected Date</h3>);
   const priceUp = num > num2 ? 'increase' : 'decrease';
   const showIcon = num > num2 
