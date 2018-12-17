@@ -2,14 +2,16 @@ import React from 'react';
 import './daily-summary.css';
 import { TrendingUp, TrendingDown } from '@material-ui/icons';
 import moment from 'moment';
-// <TrendingDown style={{ fill: 'red', height: '115px', width: '115px', }} />
 
-const num = 0.08
+const num = 0.88
 const num2 = 0.8
 
 const DailySummary = ({ summaryData }) => {
   const selectedDate = summaryData.date ? (<h3>{summaryData.date}</h3>) : (<h3>Selected Date</h3>);
   const priceUp = num > num2 ? 'increase' : 'decrease';
+  const showIcon = num > num2 
+    ? <TrendingUp  style={{ fill: 'green', height: '115px', width: '115px' }} />
+    : <TrendingDown style={{ fill: 'red', height: '115px', width: '115px', }} />;
     return (
     <div className="daily-summary-container">
       <div className="left-side-container">
@@ -21,7 +23,7 @@ const DailySummary = ({ summaryData }) => {
       </div>
       <div className="right-side-container">
         <div className="icon-area">
-          <TrendingUp  style={{ fill: 'green', height: '115px', width: '115px' }} />
+          {showIcon}
           <h4 className={priceUp}>{num2}%</h4>
         </div>
       </div>
