@@ -4,11 +4,13 @@ import { TrendingUp, TrendingDown } from '@material-ui/icons';
 import moment from 'moment';
 // <TrendingDown style={{ fill: 'red', height: '115px', width: '115px', }} />
 
+
 const DailySummary = ({ summaryData }) => {
+  const selectedDate = summaryData.date ? (<h3>{summaryData.date}</h3>) : (<h3>Selected Date</h3>)
     return (
     <div className="daily-summary-container">
       <div className="left-side-container">
-        <h3>{summaryData.date}</h3>
+        {selectedDate}
         <h3>Number of Products Sold</h3>
         <h4>125</h4>
         <h3>Total Revenue For {moment(summaryData.date).format("MMM Do")}</h3>
