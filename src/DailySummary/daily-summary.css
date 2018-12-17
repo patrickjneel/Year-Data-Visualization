@@ -26,3 +26,11 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.increase {
+  color: green;
+}
+
+.decrease {
+  color: red;
+}
