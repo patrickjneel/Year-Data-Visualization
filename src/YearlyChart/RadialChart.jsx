@@ -11,7 +11,6 @@ class RadialChart extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps)
     const { weatherData } = nextProps;
     if (!weatherData) return {};
 
