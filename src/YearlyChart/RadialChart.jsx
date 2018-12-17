@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
 
-const width = 650;
-const height = 650;
+const width = 500;
+const height = 500;
 
 class RadialChart extends Component {
   state = {

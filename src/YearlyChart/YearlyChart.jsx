@@ -1,25 +1,25 @@
-import React, { Component } from "react";
-import * as d3 from "d3";
+// import React, { Component } from "react";
+// import * as d3 from "d3";
 
-const width = 650;
-const height = 650;
-const margin = { top: 20, right: 5, bottom: 20, left: 35 };
+// const width = 650;
+// const height = 650;
+// const margin = { top: 20, right: 5, bottom: 20, left: 35 };
 
-class Chart extends Component {
-  state = {
-    slices: []
-  };
+// class Chart extends Component {
+//   state = {
+//     slices: []
+//   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { data } = nextProps;
-    if (!data) return {};
+//   static getDerivedStateFromProps(nextProps, prevState) {
+//     const { data } = nextProps;
+//     if (!data) return {};
 
-    return {};
-  }
+//     return {};
+//   }
 
-  render() {
-    return <svg width={width} height={height} />;
-  }
-}
+//   render() {
+//     return <svg width={width} height={height} />;
+//   }
+// }
 
-export default Chart;
+// export default Chart;
