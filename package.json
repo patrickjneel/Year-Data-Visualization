@@ -22,5 +22,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "atob": "^2.1.2",
+    "btoa": "^1.2.1",
+    "faker": "^4.1.0",
+    "lodash.sample": "^4.2.1"
+  }
 }
