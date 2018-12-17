@@ -50,16 +50,17 @@ class RadialChart extends Component {
   }
 
   render() {
+    const { slices, tempAnnotations } = this.state;
     return (
       <div  className="chart-area">
         <h2>2018 Average Temperature</h2>
         <svg width={width} height={height}>
           <g transform={`translate(${width / 2}, ${height / 2})`}>
-            {this.state.slices.map((d, i) => (
+            {slices.map((d, i) => (
               <path key={i} d={d.path} fill={d.fill} />
             ))}
 
-            {this.state.tempAnnotations.map((d, i) => (
+            {tempAnnotations.map((d, i) => (
               <g key={i}>
                 <circle r={d.r} fill="none" stroke="#999" />
                 <text y={-d.r - 2} textAnchor="middle">
