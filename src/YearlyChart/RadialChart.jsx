@@ -9,7 +9,6 @@ class RadialChart extends Component {
   state = {
     slices: [], // array of svg path commands, each representing a day
     tempAnnotations: [],
-    
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {

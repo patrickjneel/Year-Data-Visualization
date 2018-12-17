@@ -15,11 +15,6 @@
   width: 40%;
 }
 
-.daily-percentage {
-  margin: unset;
-  /*margin-right: 10px;*/
-}
-
 .icon-area {
   align-items: center;
   display: flex;
@@ -29,8 +24,10 @@
 
 .increase {
   color: green;
+  margin: unset;
 }
 
 .decrease {
   color: red;
+  margin: unset;
 }
