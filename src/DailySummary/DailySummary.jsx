@@ -4,10 +4,12 @@ import { TrendingUp, TrendingDown } from '@material-ui/icons';
 
 // <TrendingDown style={{ fill: 'red', height: '50px', width: '50px', }} />
 
-const DailySummary = () => (
+const DailySummary = ({ summaryData }) => {
+  console.log(summaryData)
+    return (
     <div className="daily-summary-container">
       <div className="left-side-container">
-        <h3>April 10, 2018</h3>
+        <h3>{summaryData.date}</h3>
         <h3>Number of Products Sold</h3>
         <h4>125</h4>
         <h3>Total Revenue April 10</h3>
@@ -18,7 +20,9 @@ const DailySummary = () => (
         <h4 className="daily-percentage">0.78%</h4>
       </div>
     </div>
-  )
+    )
+  }
+
 
 
 export default DailySummary;

@@ -8,7 +8,8 @@ const height = 500;
 class RadialChart extends Component {
   state = {
     slices: [], // array of svg path commands, each representing a day
-    tempAnnotations: []
+    tempAnnotations: [],
+    
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -24,7 +25,6 @@ class RadialChart extends Component {
       .scaleSequential()
       .domain(d3.extent(weatherData, d => d.avg))
       .interpolator(d3.interpolateRdYlBu);
-
     // get the angle for each slice
     // 2PI / 365
     const perSliceAngle = (2 * Math.PI) / weatherData.length;
@@ -37,7 +37,7 @@ class RadialChart extends Component {
         innerRadius: radiusScale(d.low),
         outerRadius: radiusScale(d.high)
       });
-      return { path, fill: colorScale(d.avg) };
+      return { path, fill: colorScale(d.avg), data: d };
     });
 
     const tempAnnotations = [5, 20, 40, 60, 80].map(temp => {
@@ -53,11 +53,12 @@ class RadialChart extends Component {
     const { slices, tempAnnotations } = this.state;
     return (
       <div  className="chart-area">
-        <h2>2018 Average Temperature</h2>
+       <h1>Mouse Coordinates: { this.state.x } { this.state.y }</h1>
+        <h2 >2018 Average Temperature</h2>
         <svg width={width} height={height}>
           <g transform={`translate(${width / 2}, ${height / 2})`}>
             {slices.map((d, i) => (
-              <path key={i} d={d.path} fill={d.fill} />
+              <path key={i} d={d.path} fill={d.fill} onMouseMove={(e) => this.props.mouseMove(d.data)} />
             ))}
 
             {tempAnnotations.map((d, i) => (
