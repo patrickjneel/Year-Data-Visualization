@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import * as d3 from "d3";
 import './yearly-chart.css';
 
@@ -51,11 +51,9 @@ class RadialChart extends Component {
   render() {
     const { slices, tempAnnotations } = this.state;
     return (
-      <div  className="chart-area">
-       <h1>Mouse Coordinates: { this.state.x } { this.state.y }</h1>
-        <h2 >2018 Average Temperature</h2>
+      <Fragment>
         <svg width={width} height={height}>
-          <g transform={`translate(${width / 2}, ${height / 2})`}>
+          <g  transform={`translate(${width / 2}, ${height / 2})`}>
             {slices.map((d, i) => (
               <path key={i} d={d.path} fill={d.fill} onMouseMove={(e) => this.props.mouseMove(d.data)} />
             ))}
@@ -70,7 +68,7 @@ class RadialChart extends Component {
             ))}
           </g>
         </svg>
-      </div>
+      </Fragment>
     );
   }
 }

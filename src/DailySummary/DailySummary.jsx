@@ -3,32 +3,38 @@ import './daily-summary.css';
 import { TrendingUp, TrendingDown } from '@material-ui/icons';
 import moment from 'moment';
 
-const num = 0.88
-const num2 = 0.8
-
-const DailySummary = ({ summaryData,find }) => {
-  const findStuff = find(summaryData.date)
-  console.log(findStuff)
-  const selectedDate = summaryData.date ? (<h3>{summaryData.date}</h3>) : (<h3>Selected Date</h3>);
-  const priceUp = num > num2 ? 'increase' : 'decrease';
-  const showIcon = num > num2 
-    ? <TrendingUp  style={{ fill: 'green', height: '115px', width: '115px' }} />
-    : <TrendingDown style={{ fill: 'red', height: '115px', width: '115px', }} />;
+const DailySummary = ({ summaryData, selectedDateData }) => {
+  const currencyArr = selectedDateData(summaryData.date)
+  let revenue = currencyArr
+    .map(revenue => parseInt(revenue.properties.orderTotal))
+    .reduce((accum, currentVal) => accum + currentVal, 0);
+  let currency = revenue
+    .toFixed(2)
+    .toString()
+    .replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  const selectedDate = summaryData.date 
+    ? (<span className="date-shown" cla>{moment(summaryData.date).format("MMM Do")}</span>) 
+    : (<span className="date-shown">Selected Date</span>);
+  // const priceUp = num > num2 ? 'increase' : 'decrease';
+  // const showIcon = num > num2 
+  //   ? <TrendingUp  style={{ fill: 'green', height: '115px', width: '115px' }} />
+  //   : <TrendingDown style={{ fill: 'red', height: '115px', width: '115px', }} />;
     return (
     <div className="daily-summary-container">
-      <div className="left-side-container">
+      <div className="top-card">
         {selectedDate}
-        <h3>Number of Products Sold</h3>
-        <h4>125</h4>
-        <h3>Total Revenue For {moment(summaryData.date).format("MMM Do")}</h3>
-        <h4>$8,000</h4>
+        <span className="percentage">+7.8%</span>
       </div>
-      <div className="right-side-container">
+      <div className="bottom-card">
+        <span className="numbers-shown">Revenue: <span className="daily-totals">${currency}</span></span>
+        <span className="numbers-shown products-right">Products Sold: <span className="daily-totals">125</span></span>
+      </div>
+      {/* <div className="right-side-container">
         <div className="icon-area">
           {showIcon}
           <h4 className={priceUp}>{num2}%</h4>
         </div>
-      </div>
+      </div> */}
     </div>
     )
   }

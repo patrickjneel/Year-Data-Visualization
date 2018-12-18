@@ -1,33 +1,55 @@
 .daily-summary-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.left-side-container {
-  padding-left: 10px;
-  width: 60%;
-}
-
-.right-side-container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  width: 40%;
-}
-
-.icon-area {
-  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 7px 3px 40px -4px rgba(211,211,211,1);
+  color: #888888;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
-.increase {
-  color: green;
-  margin: unset;
+.date-shown {
+  background-color: #ffffff;
+  color: #111111;
+  font-size: 26px;
+  margin-right: 35px;
+  margin-top: 15px;
 }
 
-.decrease {
-  color: red;
-  margin: unset;
+.top-card {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.bottom-card {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+}
+
+.numbers-shown {
+  font-size: 18px;
+  background-color: #ffffff;
+  padding: 25px;
+  width: 250px;
+}
+
+.products-right {
+  border-left: 1px solid #dee2e6;
+  padding-left: 30px;
+}
+
+.daily-totals {
+  font-size: 18px;
+  background-color: #ffffff;
+  color: #111111;
+}
+
+.percentage {
+  background-color: #ffffff;
+  color: #1de9b6;
+  font-size: 18px;
+  margin-bottom: 15px;
+  margin-right: 35px;
 }

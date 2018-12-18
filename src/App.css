@@ -1,16 +1,14 @@
 * {
-  /*font-family: 'Arimo', sans-serif;*/
-  font-family: 'Open Sans Condensed', sans-serif;
+  background-color: #f4f7fa;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .app {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .daily-summary {
-  border: 2px solid green;
-  height: 250px;
-  margin: 15px;
-  width: 60%;
+  margin-left: 15px;
+  width: 500px;
 }
