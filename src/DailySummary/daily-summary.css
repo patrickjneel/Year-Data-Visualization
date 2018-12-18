@@ -1,28 +1,69 @@
 .daily-summary-container {
+  background-color: #ffffff;
+  box-shadow: 7px 3px 40px -4px rgba(211,211,211,1);
+  color: #888888;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
-.left-side-container {
+/*.left-side-container {
+  background-color: #ffffff;
   padding-left: 10px;
-  width: 60%;
+  width: 435px;
+}*/
+
+.date-shown {
+  background-color: #ffffff;
+  color: #111111;
+  font-size: 26px;
+  margin: 25px;
 }
 
-.right-side-container {
+.top-card {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  text-align: right;
+}
+
+.bottom-card {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+}
+
+.numbers-shown {
+  font-size: 18px;
+  background-color: #ffffff;
+  padding: 25px;
+}
+
+.products-right {
+  border-left: 1px solid #dee2e6;
+  padding-left: 30px;
+}
+
+.daily-totals {
+  font-size: 18px;
+  background-color: #ffffff;
+  color: #111111;
+}
+
+/*.right-side-container {
+  background-color: #ffffff;
   align-items: center;
   display: flex;
   justify-content: center;
   width: 40%;
-}
+}*/
 
-.icon-area {
+/*.icon-area {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
+}*/
 
-.increase {
+/*.increase {
   color: green;
   margin: unset;
 }
@@ -30,4 +71,4 @@
 .decrease {
   color: red;
   margin: unset;
-}
+}*/
