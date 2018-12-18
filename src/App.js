@@ -13,10 +13,9 @@ class App extends Component {
   componentWillMount() {
   }
 
-  findSome = (date) => {
-    console.log(date)
-    return orders.features.filter(day => day.properties.createdDate === date);
-  }
+  selectedDate = (date) => (
+    orders.features.filter(day => day.properties.createdDate === date)
+  )
 
 
   onMouseMove = (data) => {
@@ -30,7 +29,7 @@ class App extends Component {
           <RadialChart weatherData={weatherData2018} mouseMove={this.onMouseMove}/>
         </div>
         <div className="daily-summary">
-          <DailySummary summaryData={this.state.data} find={this.findSome}/>
+          <DailySummary summaryData={this.state.data} selectedDateData={this.selectedDate}/>
         </div>
       </div>
     );
