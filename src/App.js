@@ -25,9 +25,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <div>
           <RadialChart weatherData={weatherData2018} mouseMove={this.onMouseMove}/>
-        </div>
         <div className="daily-summary">
           <DailySummary summaryData={this.state.data} selectedDateData={this.selectedDate}/>
         </div>
