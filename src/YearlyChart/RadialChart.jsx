@@ -54,7 +54,7 @@ class RadialChart extends Component {
       <div  className="chart-area">
         <h2 className="chart-title">2018 Average Temperature</h2>
         <svg width={width} height={height}>
-          <g transform={`translate(${width / 2}, ${height / 2.51})`}>
+          <g  transform={`translate(${width / 2}, ${height / 2})`}>
             {slices.map((d, i) => (
               <path key={i} d={d.path} fill={d.fill} onMouseMove={(e) => this.props.mouseMove(d.data)} />
             ))}

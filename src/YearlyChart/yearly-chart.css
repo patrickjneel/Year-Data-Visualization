@@ -1,9 +1,16 @@
 .chart-area {
+  /*background-color: #ffffff;*/
   text-align: center;
   width: 40%;
 }
 
-.chart-title {
+/*.chart-title {
   margin: 10px 0px;
+}*/
+
+svg {
+  background-color: #ffffff;
+  box-shadow: 7px 3px 40px -4px rgba(211,211,211,1);
+  margin: 15px;
 }
 
