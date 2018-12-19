@@ -17,17 +17,15 @@ const DailySummary = ({ summaryData, selectedDateData, dailyRev }) => {
     : (<span className="date-shown">Selected Date</span>);
   const compareDailyAvgRev = parseFloat(dailyRev.replace(/[^0-9-.]/g, ''));
   const compareDailyRev = parseFloat(currency.replace(/[^0-9-.]/g, ''));
-  //might need to compareDailyRev - compareDailyAvgRev???
-  const average = compareDailyRev / compareDailyAvgRev * 100;
-
-  const comparisonRev = dailyRev > currency
-    ? (<span className="percentage high">+{average.toFixed(2)}%</span>) 
-    : (<span className="percentage low">-{average.toFixed(2)}%</span>)
+  const average = ((compareDailyRev - compareDailyAvgRev) / compareDailyAvgRev) * 100;
+  const comparisonRev = parseInt(dailyRev) > parseInt(currency)
+    ? (<span className="percentage low">{average.toFixed(2)}%</span>) 
+    : (<span className="percentage high">+{average.toFixed(2)}%</span>)
   return (
     <div className="daily-summary-container">
       <div className="top-card">
         {selectedDate}
-        {comparisonRev ? comparisonRev : (<span className="percentage"> </span>)}
+        {comparisonRev}
       </div>
       <div className="bottom-card">
         <span className="numbers-shown">Revenue: <span className="daily-totals">${currency}</span></span>
