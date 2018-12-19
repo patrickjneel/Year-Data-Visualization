@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 
-class Globe extends Component {
-  render() {
-    
-  }
-}
-
-    var width = 960,
+  var width = 960,
       height = 960,
       radius = 228,
       mesh,
@@ -19,6 +13,13 @@ class Globe extends Component {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     document.body.appendChild(renderer.domElement);
+
+class Globe extends Component {
+
+  render() {
+
+  }
+}
 
     // All Orders
     let ordersData;
@@ -178,3 +179,4 @@ class Globe extends Component {
       };
     }
 
+export default Globe;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DailySummary from './DailySummary/DailySummary';
 import RadialChart from './YearlyChart/RadialChart';
+// import Globe from './Globe/Globe.jsx';
 import './App.css';
 import weatherData2018 from '../src/db/weather2018.json';
 import orders from '../src/db/orders.json';
