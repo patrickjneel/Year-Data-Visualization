@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
+import * as THREE from 'three';
 
   var width = 960,
       height = 960,
@@ -15,8 +16,17 @@ import * as d3 from "d3";
     renderer.setSize(width, height);
     document.body.appendChild(renderer.domElement);
 
-class Globe extends Component {
+    // Highlighted Orders (Passed as props or state?)
 
+    var highlightedGeometry = new THREE.Geometry();
+
+    var highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4 });
+    var highlightedField = new THREE.Points(
+      highlightedGeometry,
+      highlightedMaterial
+    );
+
+class Globe extends Component {
   // Converts a point [longitude, latitude] in degrees to a THREE.Vector3.
     vertex = point => {
       var lambda = (point[0] * Math.PI) / 180,
@@ -33,7 +43,7 @@ class Globe extends Component {
     wireframe = (multilinestring, material) => {
       const geometry = new THREE.Geometry();
       multilinestring.coordinates.forEach(function(line) {
-        d3.pairs(line.map(vertex), function(a, b) {
+        d3.pairs(line.map(this.vertex), function(a, b) {
           geometry.vertices.push(a, b);
         });
       });
@@ -102,23 +112,14 @@ class Globe extends Component {
       };
     }
 
-  render() {
-    return (
-      <div>
-      </div>
-    )
-  }
-}
-
-    // All Orders
+        // All Orders
     allOrders = () => {
       let ordersData;
     var allOrdersGeometry = new THREE.Geometry();
-   
-        ordersData = this.props.filteredData;
-        for (var i = 0; i < myJson.features.length; i++) {
+        ordersData = this.props.oders;
+        for (var i = 0; i < this.props.orders.features.length; i++) {
           allOrdersGeometry.vertices.push(
-            vertex(myJson.features[i].geometry.coordinates)
+            this.vertex(this.props.orders.features[i].geometry.coordinates)
           );
           if (
             ordersData.features[i].properties.accountNumber
@@ -126,23 +127,21 @@ class Globe extends Component {
               .startsWith("4")
           ) {
             highlightedGeometry.vertices.push(
-              vertex(ordersData.features[i].geometry.coordinates)
+              this.vertex(ordersData.features[i].geometry.coordinates)
             );
           }
         }
+        const allOrdersMaterial = new THREE.PointsMaterial({ color: 0xc0c0c0 });
+        const allOrdersField = new THREE.Points(allOrdersGeometry, allOrdersMaterial);
     }
-    
-    var allOrdersMaterial = new THREE.PointsMaterial({ color: 0xc0c0c0 });
-    var allOrdersField = new THREE.Points(allOrdersGeometry, allOrdersMaterial);
 
-    // Highlighted Orders (Passed as props or state?)
-
-    var highlightedGeometry = new THREE.Geometry();
-
-    var highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4 });
-    var highlightedField = new THREE.Points(
-      highlightedGeometry,
-      highlightedMaterial
-    );
+  render() {
+    return (
+      <div>
+        Big Globe Here
+      </div>
+    )
+  }
+}
 
 export default Globe;

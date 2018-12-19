@@ -32,12 +32,18 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
-          <RadialChart weatherData={weatherData2018} mouseMove={this.onMouseMove}/>
-        <div className="daily-summary">
-          <DailySummary summaryData={this.state.data} selectedDateData={this.selectedDate}/>
+      <div className="app-page">
+        <div className="app-left">
+            <RadialChart weatherData={weatherData2018} mouseMove={this.onMouseMove}/>
+          <div className="daily-summary">
+            <DailySummary 
+              summaryData={this.state.data} 
+              selectedDateData={this.selectedDate}
+              dailyRev={this.state.dailyRev}
+            />
+          </div>
         </div>
-        <Globe />
+          <Globe orders={orders}/>
       </div>
     );
   }
