@@ -3,7 +3,12 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-.app {
+.app-page {
+  display: flex;
+  flex-direction: row;
+}
+
+.app-left {
   display: flex;
   flex-direction: column;
 }

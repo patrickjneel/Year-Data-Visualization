@@ -54,3 +54,13 @@
   margin-bottom: 15px;
   margin-right: 35px;
 }
+
+.high {
+  background-color: #ffffff;
+  color: #1de9b6;
+}
+
+.low {
+  background-color: #ffffff;
+  color: #ff5252;
+}
