@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as d3 from "d3";
 
   var width = 960,
       height = 960,
@@ -16,85 +17,8 @@ import React, { Component } from 'react';
 
 class Globe extends Component {
 
-  render() {
-
-  }
-}
-
-    // All Orders
-    let ordersData;
-    var allOrdersGeometry = new THREE.Geometry();
-    fetch(
-      "https://raw.githubusercontent.com/patrickjneel/Year-Data-Visualization/master/src/db/orders.json"
-    )
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(myJson) {
-        ordersData = myJson;
-        for (var i = 0; i < myJson.features.length; i++) {
-          allOrdersGeometry.vertices.push(
-            vertex(myJson.features[i].geometry.coordinates)
-          );
-          if (
-            ordersData.features[i].properties.accountNumber
-              .toString()
-              .startsWith("4")
-          ) {
-            highlightedGeometry.vertices.push(
-              vertex(ordersData.features[i].geometry.coordinates)
-            );
-          }
-        }
-      });
-
-    var allOrdersMaterial = new THREE.PointsMaterial({ color: 0xc0c0c0 });
-    var allOrdersField = new THREE.Points(allOrdersGeometry, allOrdersMaterial);
-
-    // Highlighted Orders (Passed as props or state?)
-
-    var highlightedGeometry = new THREE.Geometry();
-
-    var highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4 });
-    var highlightedField = new THREE.Points(
-      highlightedGeometry,
-      highlightedMaterial
-    );
-
-    d3.json("https://unpkg.com/world-atlas@1/world/50m.json", function(
-      error,
-      topology
-    ) {
-      if (error) throw error;
-      scene.add(allOrdersField);
-      scene.add(highlightedField);
-
-      scene.add(
-        (graticule = wireframe(
-          graticule10(),
-          new THREE.LineBasicMaterial({ color: 0xd3d3d3 })
-        ))
-      );
-      scene.add(
-        (mesh = wireframe(
-          topojson.mesh(topology, topology.objects.land),
-          new THREE.LineBasicMaterial({ color: 0x4c9e00 })
-        ))
-      );
-      console.log(scene);
-      renderer.render(scene, camera);
-
-      d3.timer(function(t) {
-        highlightedField.rotation.x = allOrdersField.rotation.x = graticule.rotation.x = mesh.rotation.x =
-          (Math.sin(t / 61000) * Math.PI) / 3 - Math.PI / 2;
-        highlightedField.rotation.z = allOrdersField.rotation.z = graticule.rotation.z = mesh.rotation.z =
-          t / 60000;
-        renderer.render(scene, camera);
-      });
-    });
-
-    // Converts a point [longitude, latitude] in degrees to a THREE.Vector3.
-    function vertex(point) {
+  // Converts a point [longitude, latitude] in degrees to a THREE.Vector3.
+    vertex = point => {
       var lambda = (point[0] * Math.PI) / 180,
         phi = (point[1] * Math.PI) / 180,
         cosPhi = Math.cos(phi);
@@ -106,8 +30,8 @@ class Globe extends Component {
     }
 
     // Converts a GeoJSON MultiLineString in spherical coordinates to a THREE.LineSegments.
-    function wireframe(multilinestring, material) {
-      var geometry = new THREE.Geometry();
+    wireframe = (multilinestring, material) => {
+      const geometry = new THREE.Geometry();
       multilinestring.coordinates.forEach(function(line) {
         d3.pairs(line.map(vertex), function(a, b) {
           geometry.vertices.push(a, b);
@@ -116,8 +40,7 @@ class Globe extends Component {
       return new THREE.LineSegments(geometry, material);
     }
 
-    // See https://github.com/d3/d3-geo/issues/95
-    function graticule10() {
+   graticule10 = () => {
       var epsilon = 1e-6,
         x1 = 180,
         x0 = -x1,
@@ -178,5 +101,48 @@ class Globe extends Component {
           )
       };
     }
+
+  render() {
+    return (
+      <div>
+      </div>
+    )
+  }
+}
+
+    // All Orders
+    allOrders = () => {
+      let ordersData;
+    var allOrdersGeometry = new THREE.Geometry();
+   
+        ordersData = this.props.filteredData;
+        for (var i = 0; i < myJson.features.length; i++) {
+          allOrdersGeometry.vertices.push(
+            vertex(myJson.features[i].geometry.coordinates)
+          );
+          if (
+            ordersData.features[i].properties.accountNumber
+              .toString()
+              .startsWith("4")
+          ) {
+            highlightedGeometry.vertices.push(
+              vertex(ordersData.features[i].geometry.coordinates)
+            );
+          }
+        }
+    }
+    
+    var allOrdersMaterial = new THREE.PointsMaterial({ color: 0xc0c0c0 });
+    var allOrdersField = new THREE.Points(allOrdersGeometry, allOrdersMaterial);
+
+    // Highlighted Orders (Passed as props or state?)
+
+    var highlightedGeometry = new THREE.Geometry();
+
+    var highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4 });
+    var highlightedField = new THREE.Points(
+      highlightedGeometry,
+      highlightedMaterial
+    );
 
 export default Globe;

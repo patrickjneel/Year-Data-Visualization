@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DailySummary from './DailySummary/DailySummary';
 import RadialChart from './YearlyChart/RadialChart';
-// import Globe from './Globe/Globe.jsx';
+import Globe from './Globe/Globe.jsx';
 import './App.css';
 import weatherData2018 from '../src/db/weather2018.json';
 import orders from '../src/db/orders.json';
@@ -37,6 +37,7 @@ class App extends Component {
         <div className="daily-summary">
           <DailySummary summaryData={this.state.data} selectedDateData={this.selectedDate}/>
         </div>
+        <Globe />
       </div>
     );
   }
