@@ -4,7 +4,8 @@
   color: #888888;
   display: flex;
   flex-direction: column;
-  margin-top: 15px;
+  margin-top: 25px;
+  height: 229px;
 }
 
 .date-shown {

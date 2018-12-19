@@ -43,7 +43,9 @@ class App extends Component {
             />
           </div>
         </div>
+        <div className="globe-container">
           <Globe orders={orders}/>
+        </div>
       </div>
     );
   }
