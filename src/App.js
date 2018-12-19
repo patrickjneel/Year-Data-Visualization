@@ -14,10 +14,9 @@ class App extends Component {
     // console.log(orders.features)
   }
 
-  selectedDate = date => {
-    console.log(date)
-    return orders.features.filter(day => day.properties.createdDate === date)
-  }
+  selectedDate = date => (
+    orders.features.filter(day => day.properties.createdDate === date)
+  );
 
 
 
