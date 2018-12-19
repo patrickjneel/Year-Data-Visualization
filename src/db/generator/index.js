@@ -8,36 +8,45 @@ const moment = require('moment');
 
 const { productCollection } = require('./productsCollection');
 
-// use the mongoose adapter as the default adapter
+const PRECISION = 0.01;
 
-const getLong = () => {
+const boundingBoxArray = [
+    {
+        lat: {
+          min: 39.18,
+          max: 47.54
+        },
+        long: {
+            min: -123.75,
+            max: -93.164
+        },
+      name: 'US Main',
+      featureCount: 1200
+    },
+
+]
+
+const generateCoordValue = (min, max) => {
   return faker.random.number({
-    'min': -121.46,
-    'max': -81,
-    'precision': 0.01
+    min,
+    max,
+    precision: PRECISION
   });
 };
 
-const getLat = () => {
-  return faker.random.number({
-    'min': 35.05,
-    'max': 53,
-    'precision': 0.01
-  });
-}
 
-const order = () => {
-  let obj = 
+const order = (bbItem, date) => {
+  let obj =
       {
         "type": "Feature",
         "geometry": {
           "type": "Point",
-          "coordinates": [getLong(), getLat()]
+          "coordinates": [generateCoordValue(), generateCoordValue()]
         },
         "properties": {
           "accountNumber": faker.random.number(),
           "orderNumber": faker.random.number(),
-          "createdDate": moment(faker.date.between('2018-01-01', '2018-12-31')).format('L'),
+          "createdDate": moment(date).format('M/DD/YYYY'),
           "userFirstName": faker.name.firstName(),
           "userLastName": faker.name.lastName(),
           "userEmail": faker.internet.email(),
@@ -56,11 +65,18 @@ const order = () => {
 }
 
 
-const listAccounts = (n) => {
-
+const generateOrders = (arr) => {
   let orders = [];
-  for (i = 0; i <= n; i++) { 
-    orders.push(order());
+  var a = moment('2018-01-01');
+  var b = moment('2018-12-31');
+
+  for (let i = 0; i < Math.ceil(arr.featureCount/365); i++) {
+
+    for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
+      console.log(m.format('M/DD/YYYY'));
+      orders.push(order(arr[i], m.format('M/DD/YYYY')));
+    }
+    
   }
 
   return orders;
@@ -71,7 +87,7 @@ const listAccounts = (n) => {
 
 const geoJsonTemplate = {
   "type": "FeatureCollection",
-  "features": listAccounts(1800)
+  "features": generateOrders(boundingBoxArray)
 }
 
 
