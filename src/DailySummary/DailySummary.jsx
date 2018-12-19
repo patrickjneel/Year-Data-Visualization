@@ -1,6 +1,5 @@
 import React from 'react';
 import './daily-summary.css';
-import { TrendingUp, TrendingDown } from '@material-ui/icons';
 import moment from 'moment';
 
 const DailySummary = ({ summaryData, selectedDateData }) => {
