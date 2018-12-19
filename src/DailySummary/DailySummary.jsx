@@ -35,6 +35,4 @@ const DailySummary = ({ summaryData, selectedDateData, dailyRev }) => {
     )
   }
 
-
-
 export default DailySummary;

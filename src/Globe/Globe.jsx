@@ -1,41 +1,72 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
 import * as THREE from 'three';
+import * as topojson from "topojson-client";
 
-  var width = 960,
-      height = 960,
-      radius = 228,
-      mesh,
-      graticule,
-      scene = new THREE.Scene(),
-      camera = new THREE.PerspectiveCamera(70, width / height, 1, 1000),
-      renderer = new THREE.WebGLRenderer({ alpha: true });
-
-    camera.position.z = 400;
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(width, height);
-    document.body.appendChild(renderer.domElement);
-
+  let mesh;
+  let graticule;
+    // renderer.setPixelRatio(window.devicePixelRatio);
     // Highlighted Orders (Passed as props or state?)
-
-    var highlightedGeometry = new THREE.Geometry();
-
-    var highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4 });
-    var highlightedField = new THREE.Points(
-      highlightedGeometry,
-      highlightedMaterial
-    );
-
 class Globe extends Component {
   // Converts a point [longitude, latitude] in degrees to a THREE.Vector3.
+  componentDidMount() {
+    const height = 960;
+    const width = 960;
+    const radius = 228;
+
+    //ADD SCENE
+    this.scene = new THREE.Scene()
+
+    //ADD CAMERA
+    this.camera = new THREE.PerspectiveCamera(70, width / height, 1, 1000)
+    this.camera.position.z = 400;
+
+    //ADD RENDERER
+    this.renderer = new THREE.WebGLRenderer({ alpha: true })
+    this.renderer.setSize(width, height)
+    this.mount.appendChild(this.renderer.domElement)
+
+     d3.json("https://unpkg.com/world-atlas@1/world/50m.json", (error, topology) => {
+      if (error) throw error;
+      // this.scene.add(allOrdersField);
+      // this.scene.add(highlightedField);
+      this.scene.add(
+        (graticule = this.wireframe(
+          this.graticule10(),
+          new THREE.LineBasicMaterial({ color: 0xd3d3d3 })
+        ))
+      );
+      this.scene.add(
+        (mesh = this.wireframe(
+          topojson.mesh(topology, topology.objects.land),
+          new THREE.LineBasicMaterial({ color: 0x4c9e00 })
+        ))
+      );
+      this.renderer.render(this.scene, this.camera);
+
+      d3.timer(function(t) {
+        graticule.rotation.x = mesh.rotation.x =
+          (Math.sin(t / 61000) * Math.PI) / 3 - Math.PI / 2;
+        graticule.rotation.z = mesh.rotation.z =
+          t / 60000;
+        this.renderer.render(this.scene, this.camera);
+      });
+    });
+
+    //ADD WORLD
+    // const highlightedGeometry = new THREE.Geometry();
+    // const highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4 })
+    // const highlightedField = new THREE.Points(highlightedGeometry, highlightedMaterial)
+  }
+
     vertex = point => {
       var lambda = (point[0] * Math.PI) / 180,
         phi = (point[1] * Math.PI) / 180,
         cosPhi = Math.cos(phi);
       return new THREE.Vector3(
-        radius * cosPhi * Math.cos(lambda),
-        radius * cosPhi * Math.sin(lambda),
-        radius * Math.sin(phi)
+        this.radius * cosPhi * Math.cos(lambda),
+        this.radius * cosPhi * Math.sin(lambda),
+        this.radius * Math.sin(phi)
       );
     }
 
@@ -113,33 +144,34 @@ class Globe extends Component {
     }
 
         // All Orders
-    allOrders = () => {
-      let ordersData;
-    var allOrdersGeometry = new THREE.Geometry();
-        ordersData = this.props.oders;
-        for (var i = 0; i < this.props.orders.features.length; i++) {
-          allOrdersGeometry.vertices.push(
-            this.vertex(this.props.orders.features[i].geometry.coordinates)
-          );
-          if (
-            ordersData.features[i].properties.accountNumber
-              .toString()
-              .startsWith("4")
-          ) {
-            highlightedGeometry.vertices.push(
-              this.vertex(ordersData.features[i].geometry.coordinates)
-            );
-          }
-        }
-        const allOrdersMaterial = new THREE.PointsMaterial({ color: 0xc0c0c0 });
-        const allOrdersField = new THREE.Points(allOrdersGeometry, allOrdersMaterial);
-    }
+    // allOrders = () => {
+    //   let ordersData;
+    // var allOrdersGeometry = new THREE.Geometry();
+    //     ordersData = this.props.orders;
+    //     for (var i = 0; i < this.props.orders.features.length; i++) {
+    //       allOrdersGeometry.vertices.push(
+    //         this.vertex(this.props.orders.features[i].geometry.coordinates)
+    //       );
+    //       if (
+    //         ordersData.features[i].properties.accountNumber
+    //           .toString()
+    //           .startsWith("4")
+    //       ) {
+    //         highlightedGeometry.vertices.push(
+    //           this.vertex(ordersData.features[i].geometry.coordinates)
+    //         );
+    //       }
+    //     }
+    //     // const allOrdersMaterial = new THREE.PointsMaterial({ color: 0xc0c0c0 });
+    //     // const allOrdersField = new THREE.Points(allOrdersGeometry, allOrdersMaterial);
+    // }
 
   render() {
     return (
-      <div>
-        Big Globe Here
-      </div>
+      <div
+        style={{ width: '400px', height: '400px'}}
+        ref={(mount) => this.mount = mount}
+      />
     )
   }
 }
