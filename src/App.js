@@ -8,17 +8,22 @@ import orders from '../src/db/orders.json';
 class App extends Component {
   state = {
     data: {},
+    dailyRev: 0,
   }
 
   componentWillMount() {
-    // console.log(orders.features)
+    let dailyAvg = orders.features
+      .map(rev => parseInt(rev.properties.orderTotal))
+      .reduce((a,b) => a + b / 365)
+      .toFixed(2)
+      .toString()
+      .replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    this.setState({ dailyRev: dailyAvg })
   }
 
   selectedDate = date => (
     orders.features.filter(day => day.properties.createdDate === date)
   );
-
-
 
   onMouseMove = (data) => {
     this.setState({ data });
