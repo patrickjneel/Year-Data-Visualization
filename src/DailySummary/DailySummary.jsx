@@ -11,13 +11,14 @@ const DailySummary = ({ summaryData, selectedDateData, dailyRev }) => {
     .toFixed(2)
     .toString()
     .replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    
   const selectedDate = summaryData.date 
     ? (<span className="date-shown">{moment(summaryData.date).format("MMM Do")}</span>) 
     : (<span className="date-shown">Selected Date</span>);
   const compareDailyAvgRev = parseFloat(dailyRev.replace(/[^0-9-.]/g, ''));
   const compareDailyRev = parseFloat(currency.replace(/[^0-9-.]/g, ''));
-  console.log(compareDailyRev / compareDailyAvgRev * 100)
   const average = compareDailyRev / compareDailyAvgRev * 100;
+
   const comparisonRev = dailyRev > currency
     ? (<span className="percentage high">+{average.toFixed(2)}%</span>) 
     : (<span className="percentage low">-{average.toFixed(2)}%</span>)
