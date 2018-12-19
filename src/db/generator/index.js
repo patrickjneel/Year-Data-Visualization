@@ -37,7 +37,7 @@ const order = () => {
         "properties": {
           "accountNumber": faker.random.number(),
           "orderNumber": faker.random.number(),
-          "createdDate": moment(faker.date.between('2018-01-01', '2018-12-31')).format('L'),
+          "createdDate": moment(faker.date.between('2018-01-01', '2018-12-31')).format('M/DD/YYYY'),
           "userFirstName": faker.name.firstName(),
           "userLastName": faker.name.lastName(),
           "userEmail": faker.internet.email(),

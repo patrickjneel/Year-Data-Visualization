@@ -11,11 +11,14 @@ class App extends Component {
   }
 
   componentWillMount() {
+    // console.log(orders.features)
   }
 
-  selectedDate = (date) => (
-    orders.features.filter(day => day.properties.createdDate === date)
-  )
+  selectedDate = date => {
+    console.log(date)
+    return orders.features.filter(day => day.properties.createdDate === date)
+  }
+
 
 
   onMouseMove = (data) => {
