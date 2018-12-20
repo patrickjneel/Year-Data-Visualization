@@ -16,12 +16,26 @@
   margin-top: 15px;
 }
 
-.top-card {
+.all-top-card {
   background-color: #ffffff;
   border-bottom: 1px solid #dee2e6;
   display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%
+}
+
+.top-card {
+  background-color: #ffffff;
+  display: flex;
   flex-direction: column;
   text-align: right;
+}
+
+.logo-area {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .bottom-card {
@@ -66,4 +80,13 @@
 .low {
   background-color: #ffffff;
   color: #f44236;
+}
+
+.nutrien-logo {
+  box-shadow: none;
+  background-color: #ffffff;
+  height: 45px;
+  width: 45px;
+  margin: unset;
+  padding: 15px;
 }
