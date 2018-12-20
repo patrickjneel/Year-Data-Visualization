@@ -4,7 +4,8 @@
   color: #888888;
   display: flex;
   flex-direction: column;
-  margin-top: 15px;
+  margin-top: 25px;
+  height: 229px;
 }
 
 .date-shown {
@@ -32,6 +33,8 @@
 .numbers-shown {
   font-size: 18px;
   background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  margin-top: 7px;
   padding: 25px;
   width: 250px;
 }
@@ -62,5 +65,5 @@
 
 .low {
   background-color: #ffffff;
-  color: #ff5252;
+  color: #f44236;
 }
