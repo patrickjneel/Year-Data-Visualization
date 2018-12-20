@@ -19,7 +19,7 @@ const camera = new THREE.PerspectiveCamera(
 )
 camera.position.z = 400
 let highlightedGeometry = new THREE.Geometry();
-let highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4 })
+let highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4, size: 2.2 })
 let highlightedField = new THREE.Points(highlightedGeometry, highlightedMaterial)
 
 const vertex = (point) => {
@@ -124,7 +124,6 @@ class Globe extends Component{
     const { selectedDate, summaryData } = nextProps;
     locationArr = selectedDate(summaryData.date);
     if(locationArr && locationArr.length) {
-      console.log(locationArr[0])
       for (var i = 0; i < locationArr.length; i++) {
 
           highlightedField.geometry.verticesNeedUpdate = true;
@@ -133,6 +132,7 @@ class Globe extends Component{
         );
       }
     scene.add(highlightedField)
+    console.log(highlightedField)
     }
     return true;
   }
@@ -185,11 +185,6 @@ class Globe extends Component{
       renderer.render(scene, camera);
     });
   }
-
-// componentWillUnmount(){
-//     this.stop()
-//     this.mount.removeChild(renderer.domElement)
-//   }
 
 render(){
     return(

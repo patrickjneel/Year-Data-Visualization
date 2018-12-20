@@ -23,7 +23,42 @@ const boundingBoxArray = [
       name: 'US Main',
       featureCount: 1200
     },
-
+    {
+        lat: {
+          min: -19.18,
+          max: -31.54
+        },
+        long: {
+            min: 115.75,
+            max: 146.164
+        },
+      name: 'AUS Main',
+      featureCount: 500
+    },
+    {
+        lat: {
+          min: -22.18,
+          max: -37.54
+        },
+        long: {
+            min: 139.75,
+            max: 153.164
+        },
+      name: 'AUS Bottom',
+      featureCount: 500
+    },
+    {
+        lat: {
+          min: -23.18,
+          max: -33.54
+        },
+        long: {
+            min: -48.75,
+            max: -71.164
+        },
+      name: 'SA Bottom',
+      featureCount: 500
+    },
 ]
 
 const generateCoordValue = (min, max) => {
