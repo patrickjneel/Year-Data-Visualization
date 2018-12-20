@@ -132,7 +132,6 @@ class Globe extends Component{
         );
       }
     scene.add(highlightedField)
-    console.log(highlightedField)
     }
     return true;
   }

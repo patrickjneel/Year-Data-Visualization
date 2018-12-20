@@ -13,6 +13,7 @@ class App extends Component {
   }
 
   componentWillMount() {
+    console.log(orders.features.length)
     let dailyAvg = orders.features
       .map(rev => parseInt(rev.properties.orderTotal))
       .reduce((a,b) => a + b / 365)
