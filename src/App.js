@@ -36,15 +36,15 @@ class App extends Component {
         <div className="app-left">
             <RadialChart weatherData={weatherData2018} mouseMove={this.onMouseMove}/>
           <div className="daily-summary">
-            <DailySummary 
-              summaryData={this.state.data} 
+            <DailySummary
+              summaryData={this.state.data}
               selectedDateData={this.selectedDate}
               dailyRev={this.state.dailyRev}
             />
           </div>
         </div>
         <div className="globe-container">
-          <Globe orders={orders}/>
+          <Globe orders={orders} filteredOrders={orders}/>
         </div>
       </div>
     );
