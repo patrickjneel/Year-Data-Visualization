@@ -44,6 +44,7 @@ class App extends Component {
             />
           </div>
         </div>
+   
         <div className="globe-container">
           <Globe orders={orders} summaryData={this.state.data} selectedDate={this.selectedDate}/>
         </div>

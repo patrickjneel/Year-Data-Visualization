@@ -38,8 +38,6 @@ class Globe extends Component{
   state = {
     topology: {},
   };
-
-
     // ours
   wireframe(multilinestring, material) {
     const geometry = new THREE.Geometry();
