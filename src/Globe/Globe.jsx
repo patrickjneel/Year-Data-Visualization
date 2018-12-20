@@ -18,6 +18,9 @@ const camera = new THREE.PerspectiveCamera(
   1000
 )
 camera.position.z = 400
+let highlightedGeometry = new THREE.Geometry();
+let highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4 })
+let highlightedField = new THREE.Points(highlightedGeometry, highlightedMaterial)
 
 const vertex = (point) => {
   var lambda = (point[0] * Math.PI) / 180,
@@ -30,10 +33,14 @@ const vertex = (point) => {
   );
 }
 
+let locationArr;
+
 class Globe extends Component{
   state = {
     topology: {},
   };
+
+
     // ours
   wireframe(multilinestring, material) {
     const geometry = new THREE.Geometry();
@@ -107,7 +114,32 @@ class Globe extends Component{
     };
   }
 
-  async componentDidMount(){
+  shouldComponentUpdate(nextProps, nextState) {
+    scene.remove(highlightedField)
+    highlightedField.geometry.dispose()
+    highlightedField = null;
+    highlightedGeometry = null;
+    highlightedGeometry = new THREE.Geometry();
+    highlightedField = new THREE.Points(highlightedGeometry, highlightedMaterial)
+    const { selectedDate, summaryData } = nextProps;
+    locationArr = selectedDate(summaryData.date);
+    if(locationArr && locationArr.length) {
+      console.log(locationArr[0])
+      for (var i = 0; i < locationArr.length; i++) {
+
+          highlightedField.geometry.verticesNeedUpdate = true;
+          highlightedGeometry.vertices.push(
+          vertex(locationArr[i].geometry.coordinates)
+        );
+      }
+    scene.add(highlightedField)
+    }
+    return true;
+  }
+
+  async componentWillMount(){
+    const { orders, summaryData, selectedDate } = this.props;
+
     const topology = await d3.json("https://unpkg.com/world-atlas@1/world/50m.json");
     this.setState({topology});
     width = this.mount.clientWidth
@@ -118,25 +150,17 @@ class Globe extends Component{
     renderer.setSize(width, height)
     this.mount.appendChild(renderer.domElement)
     //ADD Globe here
-    const {orders, filteredOrders} = this.props;
     // create geometry
     const allOrdersGeometry = new THREE.Geometry();
     const allOrdersMaterial = new THREE.PointsMaterial({ color: 0xc0c0c0 });
     const allOrdersField = new THREE.Points(allOrdersGeometry, allOrdersMaterial);
-    const highlightedGeometry = new THREE.Geometry();
-    const highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4 })
-    const highlightedField = new THREE.Points(highlightedGeometry, highlightedMaterial)
+    
       // Add actual coord points to geometry layers
-    for (var i = 0; i < orders.features.length; i++) {
-        allOrdersGeometry.vertices.push(
-        vertex(orders.features[i].geometry.coordinates)
-      );
-    }
-    for (var i = 0; i < filteredOrders.features.length; i++) {
-        highlightedGeometry.vertices.push(
-        vertex(filteredOrders.features[i].geometry.coordinates)
-      );
-    }
+    // for (var i = 0; i < orders.features.length; i++) {
+    //     allOrdersGeometry.vertices.push(
+    //     vertex(orders.features[i].geometry.coordinates)
+    //   );
+    // }
       // add fields/layers to scene
     scene.add(allOrdersField);
     scene.add(highlightedField);
@@ -161,7 +185,6 @@ class Globe extends Component{
       renderer.render(scene, camera);
     });
   }
-
 
 // componentWillUnmount(){
 //     this.stop()

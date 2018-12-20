@@ -26,6 +26,21 @@ class App extends Component {
     orders.features.filter(day => day.properties.createdDate === date)
   );
 
+  shuffle = (a) => {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+  selectedDateGhetto = (date) => {
+    let arr = [...orders.features];
+      arr = this.shuffle(arr)
+    var half_length = Math.ceil(arr.length / 12)
+    return arr.splice(0, half_length)
+  }
+
   onMouseMove = (data) => {
     this.setState({ data });
   }
@@ -44,7 +59,7 @@ class App extends Component {
           </div>
         </div>
         <div className="globe-container">
-          <Globe orders={orders} filteredOrders={orders}/>
+          <Globe orders={orders} summaryData={this.state.data} selectedDate={this.selectedDate}/>
         </div>
       </div>
     );
