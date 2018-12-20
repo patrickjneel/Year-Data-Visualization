@@ -19,7 +19,7 @@ const camera = new THREE.PerspectiveCamera(
 )
 camera.position.z = 400
 let highlightedGeometry = new THREE.Geometry();
-let highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4, size: 2.2 })
+let highlightedMaterial = new THREE.PointsMaterial({ color: 0xff69b4, size: 3.5 })
 let highlightedField = new THREE.Points(highlightedGeometry, highlightedMaterial)
 
 const vertex = (point) => {
@@ -39,8 +39,6 @@ class Globe extends Component{
   state = {
     topology: {},
   };
-
-
     // ours
   wireframe(multilinestring, material) {
     const geometry = new THREE.Geometry();
@@ -137,8 +135,6 @@ class Globe extends Component{
   }
 
   async componentWillMount(){
-    const { orders, summaryData, selectedDate } = this.props;
-
     const topology = await d3.json("https://unpkg.com/world-atlas@1/world/50m.json");
     this.setState({topology});
     width = this.mount.clientWidth
