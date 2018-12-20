@@ -11,6 +11,18 @@ const { productCollection } = require('./productsCollection');
 const PRECISION = 0.01;
 
 const boundingBoxArray = [
+  {
+        lat: {
+          min: -23.18,
+          max: -33.54
+        },
+        long: {
+            min: -48.75,
+            max: -71.164
+        },
+      name: 'SA Bottom',
+      lp: 3
+    },
     {
         lat: {
           min: 39.18,
@@ -21,9 +33,32 @@ const boundingBoxArray = [
             max: -93.164
         },
       name: 'US Main',
-      featureCount: 1200
+      lp: 5
     },
-
+    {
+        lat: {
+          min: -19.18,
+          max: -31.54
+        },
+        long: {
+            min: 115.75,
+            max: 146.164
+        },
+      name: 'AUS Main',
+      lp: 3
+    },
+    {
+        lat: {
+          min: -22.18,
+          max: -37.54
+        },
+        long: {
+            min: 139.75,
+            max: 153.164
+        },
+      name: 'AUS Bottom',
+      lp: 4
+    },
 ]
 
 const generateCoordValue = (min, max) => {
@@ -67,13 +102,10 @@ const order = (bbItem, date) => {
 
 const generateOrders = (arr) => {
   let orders = [];
-  var a = moment('2018-01-01');
-  var b = moment('2018-12-31');
-
-  for (let i = 0; i < Math.ceil(arr.featureCount/365); i++) {
-
+  var a = new Date('2018-01-01');
+  var b = new Date('2018-12-31');
+  for (let i = 0; i < 3; i++) {
     for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
-      console.log(m.format('M/DD/YYYY'));
       orders.push(order(arr[i], m.format('M/DD/YYYY')));
     }
   }
@@ -84,10 +116,11 @@ const generateOrders = (arr) => {
 // Run this from the terminal (cd into the generator directory)
 // node index.js | pbcopy
 
-const geoJsonTemplate = {
+const geoJsonTemplate = () => {
+  return {
   "type": "FeatureCollection",
   "features": generateOrders(boundingBoxArray)
+  }
 }
 
-
-console.log(JSON.stringify(geoJsonTemplate));
+console.log(JSON.stringify(geoJsonTemplate()));
