@@ -20,6 +20,7 @@ class App extends Component {
       .toString()
       .replace(/\d(?=(\d{3})+\.)/g, '$&,');
     this.setState({ dailyRev: dailyAvg })
+
   }
 
   selectedDate = date => (
@@ -40,10 +41,11 @@ class App extends Component {
               summaryData={this.state.data}
               selectedDateData={this.selectedDate}
               dailyRev={this.state.dailyRev}
+              numProducts={this.numProducts}
             />
           </div>
         </div>
-   
+
         <div className="globe-container">
           <Globe orders={orders} summaryData={this.state.data} selectedDate={this.selectedDate}/>
         </div>
